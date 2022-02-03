@@ -1,4 +1,4 @@
-# ENDL: Enhanced Datastructs Library
+# ENDL: Enhanced Datastructs Library for C++
 
 ## Data Structs:
 -----Implemented-----
@@ -21,6 +21,7 @@
 + Kruskal
 + Prim
 + Dijkstra
+
 -----Coming Soon-----
 + Morris
 + KMP
