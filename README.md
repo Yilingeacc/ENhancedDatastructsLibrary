@@ -1,4 +1,4 @@
-# ENDL: Enhanced Datastructs Implementation
+# ENDL: Enhanced Datastructs Library
 
 ## Data Structs:
 -----Implemented-----
