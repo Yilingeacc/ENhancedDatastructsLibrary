@@ -1,4 +1,4 @@
-#include "..\include\Graph.h"
+#include "../include/Graph.h"
 
 ostream &operator<<(ostream &os, Node& node) {
     os << "Node " << node._id << ' ';

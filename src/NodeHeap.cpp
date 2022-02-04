@@ -1,4 +1,4 @@
-#include"..\include\NodeHeap.h"
+#include"../include/NodeHeap.h"
 
 NodeHeap::NodeHeap(int size) : Heap<pair<Node*, double>>(size) {
     _heapIndexMap.reserve(size);

@@ -5,6 +5,7 @@ CMakeFiles/ClionProject.dir/main.cpp.obj: \
  ../include/Graph.h \
  ../include/Heap.h \
  ../include/NodeHeap.h \
+ ../include/TrieTree.h \
  ../include/UnionFindSet.h \
  ../main.cpp
 CMakeFiles/ClionProject.dir/src/Graph.cpp.obj: \
