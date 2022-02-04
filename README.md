@@ -14,6 +14,7 @@
 + Segment Tree
 + LRU
 + LFU
++ ...
 
 ## Algorithms:
 -----Implemented-----
@@ -27,3 +28,4 @@
 + KMP
 + Manacher
 + BFPRT
++ ...
