@@ -80,6 +80,9 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="D:/codes/Cpp/ClionProject/include/BinaryTree.h">
+			<Option target="ClionProject"/>
+		</Unit>
 		<Unit filename="D:/codes/Cpp/ClionProject/include/Graph.h">
 			<Option target="ClionProject"/>
 		</Unit>
@@ -96,6 +99,9 @@
 			<Option target="ClionProject"/>
 		</Unit>
 		<Unit filename="D:/codes/Cpp/ClionProject/main.cpp">
+			<Option target="ClionProject"/>
+		</Unit>
+		<Unit filename="D:/codes/Cpp/ClionProject/src/BinarySearchTree.cpp">
 			<Option target="ClionProject"/>
 		</Unit>
 		<Unit filename="D:/codes/Cpp/ClionProject/src/Graph.cpp">

@@ -5,11 +5,10 @@
 + Graph
 + Heap
 + Union Find Set
++ Trie Tree
 
 -----Coming Soon-----
 + Binary Tree
-+ Monotonic Stack
-+ Trie Tree
 + Skip List
 + Segment Tree
 + LRU

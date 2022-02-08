@@ -152,6 +152,30 @@ main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\ClionProject.dir\build.make CMakeFiles/ClionProject.dir/main.cpp.s
 .PHONY : main.cpp.s
 
+src/BinarySearchTree.obj: src/BinarySearchTree.cpp.obj
+.PHONY : src/BinarySearchTree.obj
+
+# target to build an object file
+src/BinarySearchTree.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\ClionProject.dir\build.make CMakeFiles/ClionProject.dir/src/BinarySearchTree.cpp.obj
+.PHONY : src/BinarySearchTree.cpp.obj
+
+src/BinarySearchTree.i: src/BinarySearchTree.cpp.i
+.PHONY : src/BinarySearchTree.i
+
+# target to preprocess a source file
+src/BinarySearchTree.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\ClionProject.dir\build.make CMakeFiles/ClionProject.dir/src/BinarySearchTree.cpp.i
+.PHONY : src/BinarySearchTree.cpp.i
+
+src/BinarySearchTree.s: src/BinarySearchTree.cpp.s
+.PHONY : src/BinarySearchTree.s
+
+# target to generate assembly for a file
+src/BinarySearchTree.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\ClionProject.dir\build.make CMakeFiles/ClionProject.dir/src/BinarySearchTree.cpp.s
+.PHONY : src/BinarySearchTree.cpp.s
+
 src/Graph.obj: src/Graph.cpp.obj
 .PHONY : src/Graph.obj
 
@@ -212,6 +236,9 @@ help:
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s
+	@echo ... src/BinarySearchTree.obj
+	@echo ... src/BinarySearchTree.i
+	@echo ... src/BinarySearchTree.s
 	@echo ... src/Graph.obj
 	@echo ... src/Graph.i
 	@echo ... src/Graph.s

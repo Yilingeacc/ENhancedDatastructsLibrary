@@ -9,6 +9,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
   "D:/codes/Cpp/ClionProject/main.cpp" "D:/codes/Cpp/ClionProject/cmake-build-debug/CMakeFiles/ClionProject.dir/main.cpp.obj"
+  "D:/codes/Cpp/ClionProject/src/BinarySearchTree.cpp" "D:/codes/Cpp/ClionProject/cmake-build-debug/CMakeFiles/ClionProject.dir/src/BinarySearchTree.cpp.obj"
   "D:/codes/Cpp/ClionProject/src/Graph.cpp" "D:/codes/Cpp/ClionProject/cmake-build-debug/CMakeFiles/ClionProject.dir/src/Graph.cpp.obj"
   "D:/codes/Cpp/ClionProject/src/NodeHeap.cpp" "D:/codes/Cpp/ClionProject/cmake-build-debug/CMakeFiles/ClionProject.dir/src/NodeHeap.cpp.obj"
   )
