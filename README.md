@@ -1,16 +1,16 @@
-# ENDL: Enhanced Datastructs Library for C++
+# ENDL: ENhanced Datastructures Library for C++
 
-## Data Structs:
+## Data Structures:
 -----Implemented-----
++ Binary Tree
 + Graph
 + Heap
 + Union Find Set
 + Trie Tree
-
------Coming Soon-----
-+ Binary Tree
 + Skip List
 + Segment Tree
+
+-----Coming Soon-----
 + LRU
 + LFU
 + ...

@@ -11,23 +11,17 @@
 using namespace std;
 using Mat = vector<vector<int>>;
 
+
 class Node;
 class Edge;
 class Graph;
 class NodeHeap;
-vector<Node*> sortedTopology(Graph&);
-unordered_set<Edge*> kruskalMST(Graph&);
-unordered_set<Edge*> primMST(Graph&);
-unordered_map<Node*, double> dijkstra(Graph&, Node*);
 
 class Node {
     friend ostream&operator<<(ostream&os, Node&node);
     friend struct hash<Node>;
     friend class Graph;
     friend class NodeHeap;
-    friend vector<Node*> sortedTopology(Graph&);
-    friend unordered_set<Edge*> primMST(Graph&);
-    friend unordered_map<Node*, double> dijkstra(Graph&, Node*);
     int _id;
     int _in;
     int _out;
@@ -49,9 +43,7 @@ class Edge {
     friend ostream&operator<<(ostream&os, Edge&edge);
     friend struct CmpEdgePtrs;
     friend class NodeHeap;
-    friend unordered_set<Edge*> kruskalMST(Graph&);
-    friend unordered_set<Edge*> primMST(Graph&);
-    friend unordered_map<Node*, double> dijkstra(Graph&, Node*);
+    friend class Graph;
     double _w;
     Node* _src;
     Node* _dst;
@@ -68,10 +60,6 @@ struct CmpEdgePtrs {
 
 class Graph {
     friend class NodeHeap;
-    friend vector<Node*> sortedTopology(Graph&);
-    friend unordered_set<Edge*> kruskalMST(Graph&);
-    friend unordered_set<Edge*> primMST(Graph&);
-    friend unordered_map<Node*, double> dijkstra(Graph&, Node*);
     unordered_map<int, Node*> _nodes;
     unordered_set<Edge*> _edges;
 public:
@@ -79,6 +67,10 @@ public:
     explicit Graph(Mat&);
     Node* getNode(int id) { return _nodes[id]; }
     ~Graph();
-    static void dfs(Node*);
-    static void bfs(Node*);
+    static vector<int> dfs(Node*);
+    static vector<int> bfs(Node*);
+    static vector<Node*> sortedTopology(Graph&);
+    static unordered_set<Edge*> kruskalMST(Graph&);
+    static unordered_set<Edge*> primMST(Graph&);
+    static unordered_map<Node*, double> dijkstra(Graph&, Node*);
 };

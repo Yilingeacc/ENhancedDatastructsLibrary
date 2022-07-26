@@ -5,68 +5,6 @@ ostream &operator<<(ostream& os, const TreeNode& node) {
     return os;
 }
 
-void TreeNode::preOrder() {
-    cout << *this;
-    if (this->_left) this->_left->preOrder();
-    if (this->_right) this->_right->preOrder();
-}
-
-void TreeNode::inOrder() {
-    if (this->_left) this->_left->inOrder();
-    cout << *this;
-    if (this->_right) this->_right->inOrder();
-}
-
-void TreeNode::postOrder() {
-    if (this->_left) this->_left->postOrder();
-    if (this->_right) this->_right->postOrder();
-    cout << *this;
-}
-
-tuple<bool, int, int> TreeNode::isBinarySearchTree() {
-    tuple<bool, int, int> leftInfo = this->_left ? this->_left->isBinarySearchTree() : make_tuple(true, 0, 0);
-    tuple<bool, int, int> rightInfo = this->_right ? this->_right->isBinarySearchTree() : make_tuple(true, 0, 0);
-    if (!get<0>(leftInfo) || !get<0>(rightInfo)) return make_tuple(false, 0, 0);
-    if (this->_value <= get<2>(leftInfo) || this->_value >= get<1>(rightInfo)) return make_tuple(false, 0, 0);
-    return make_tuple(true, get<1>(leftInfo), get<2>(rightInfo));
-}
-
-bool TreeNode::isCompleteBinaryTree() {
-    bool leaf = false;
-    queue<TreeNode*> que;
-    que.push(this);
-    while (!que.empty()) {
-        TreeNode* cur = que.front(); que.pop();
-        if (!cur->_left && cur->_right) return false;
-        if (leaf && (cur->_left || cur->_right)) return false;
-        if (!cur->_left || !cur->_right) leaf = true;
-        if (cur->_left) que.push(cur->_left);
-        if (cur->_right) que.push(cur->_right);
-    }
-    return true;
-}
-
-int TreeNode::getCBTNodeNum() {
-    int depth = this->getCBTDepth();
-    if (_right && _right->getCBTDepth() + 1 == depth) {
-        return (1 << (depth - 1)) + _right->getCBTNodeNum();
-    } else if (_left){
-        return (1 << (depth - 2)) + _left->getCBTNodeNum();
-    } else {
-        return 1;
-    }
-}
-
-int TreeNode::getCBTDepth() {
-    int depth = 0;
-    TreeNode* cur = this;
-    while (cur) {
-        cur = cur->_left;
-        depth++;
-    }
-    return depth;
-}
-
 string TreeNode::serialByPreOrder() {
     string str = to_string(_value) + '_';
     str += _left ? _left->serialByPreOrder() : "#_";
@@ -88,39 +26,44 @@ string TreeNode::serialByPostOrder() {
     return str;
 }
 
-void BinaryTree::preOrder() {
-    if (!_root) return;
+vector<int> BinaryTree::preOrder(TreeNode* root) {
+    if (!root) return {};
     stack<TreeNode*> st;
-    st.push(_root);
+    vector<int> v;
+    st.push(root);
     while (!st.empty()) {
         TreeNode* cur = st.top(); st.pop();
-        cout << *cur;
+        v.push_back(cur->_value);
         if (cur->_right) st.push(cur->_right);
         if (cur->_left) st.push(cur->_left);
     }
+    return v;
 }
 
-void BinaryTree::inOrder() {
-    if (!_root) return;
-    TreeNode* cur = _root;
+vector<int> BinaryTree::inOrder(TreeNode* root) {
+    if (!root) return {};
+    TreeNode* cur = root;
     stack<TreeNode*> st;
+    vector<int> v;
     while (cur || !st.empty()) {
         if (cur) {
             st.push(cur);
             cur = cur->_left;
         } else {
             cur = st.top(); st.pop();
-            cout << *cur;
+            v.push_back(cur->_value);
             cur = cur->_right;
         }
     }
+    return v;
 }
 
-void BinaryTree::postOrder() {
-    if (!_root) return;
+vector<int> BinaryTree::postOrder(TreeNode* root) {
+    if (!root) return {};
     stack<TreeNode*> st;
     stack<TreeNode*> collect;
-    st.push(_root);
+    vector<int> v;
+    st.push(root);
     while (!st.empty()) {
         TreeNode* cur = st.top(); st.pop();
         collect.push(cur);
@@ -128,37 +71,29 @@ void BinaryTree::postOrder() {
         if (cur->_right) st.push(cur->_right);
     }
     while (!collect.empty()) {
-        cout << *collect.top(); collect.pop();
+        v.push_back(collect.top()->_value);
+        collect.pop();
     }
 }
 
-void BinaryTree::levelOrder() {
-    if (!_root) return;
+vector<int> BinaryTree::levelOrder(TreeNode* root) {
+    if (!root) return {};
     queue<TreeNode*> que;
-    que.push(_root);
+    vector<int> v;
+    que.push(root);
     while (!que.empty()) {
         TreeNode* cur = que.front(); que.pop();
-        cout << *cur;
+        v.push_back(cur->_value);
         if (cur->_left) que.push(cur->_left);
         if (cur->_right) que.push(cur->_right);
     }
+    return v;
 }
 
-void BinaryTree::preOrderRecur() {
-    _root->preOrder();
-}
-
-void BinaryTree::inOrderRecur() {
-    _root->inOrder();
-}
-
-void BinaryTree::postOrderRecur() {
-    _root->postOrder();
-}
-
-void BinaryTree::morrisPreOrder() {
-    TreeNode* cur = _root;
+vector<int> BinaryTree::morrisPreOrder(TreeNode* root) {
+    TreeNode* cur = root;
     TreeNode* mostRight;
+    vector<int> v;
     while (cur) {
         mostRight = cur->_left;
         if (mostRight) {
@@ -166,7 +101,7 @@ void BinaryTree::morrisPreOrder() {
                 mostRight = mostRight->_right;
             }
             if (!mostRight->_right) {
-                cout << *cur;
+                v.push_back(cur->_value);
                 mostRight->_right = cur;
                 cur = cur->_left;
                 continue;
@@ -174,15 +109,17 @@ void BinaryTree::morrisPreOrder() {
                 mostRight->_right = nullptr;
             }
         } else {
-            cout << *cur;
+            v.push_back(cur->_value);
         }
         cur = cur->_right;
     }
+    return v;
 }
 
-void BinaryTree::morrisInOrder() {
-    TreeNode* cur = _root;
+vector<int> BinaryTree::morrisInOrder(TreeNode* root) {
+    TreeNode* cur = root;
     TreeNode* mostRight;
+    vector<int> v;
     while (cur) {
         mostRight = cur->_left;
         if (mostRight) {
@@ -197,14 +134,16 @@ void BinaryTree::morrisInOrder() {
                 mostRight->_right = nullptr;
             }
         }
-        cout << *cur;
+        v.push_back(cur->_value);
         cur = cur->_right;
     }
+    return v;
 }
 
-void BinaryTree::morrisPostOrder() {
-    TreeNode* cur = _root;
+vector<int> BinaryTree::morrisPostOrder(TreeNode* root) {
+    TreeNode* cur = root;
     TreeNode* mostRight;
+    vector<int> v;
     while (cur) {
         mostRight = cur->_left;
         if (mostRight) {
@@ -217,39 +156,81 @@ void BinaryTree::morrisPostOrder() {
                 continue;
             } else {
                 mostRight->_right = nullptr;
-                printEdge(cur->_left);
+                handleEdge(cur->_left, v);
             }
         }
         cur = cur->_right;
     }
-    printEdge(_root);
+    handleEdge(root,v);
+    return v;
 }
 
-bool BinaryTree::isBinarySearchTree() {
-    return get<0>(this->_root->isBinarySearchTree());
+tuple<bool, int, int> BinaryTree::isBinarySearchTreeRecur(TreeNode* root) {
+    tuple<bool, int, int> leftInfo = root->_left ? isBinarySearchTreeRecur(root->_left) : make_tuple(true, 0, 0);
+    tuple<bool, int, int> rightInfo = root->_right ? isBinarySearchTreeRecur(root->_right) : make_tuple(true, 0, 0);
+    if (!get<0>(leftInfo) || !get<0>(rightInfo)) return make_tuple(false, 0, 0);
+    if (root->_value <= get<2>(leftInfo) || root->_value >= get<1>(rightInfo)) return make_tuple(false, 0, 0);
+    return make_tuple(true, get<1>(leftInfo), get<2>(rightInfo));
 }
 
-bool BinaryTree::isCompleteBinaryTree() {
-    return _root == nullptr || _root->isCompleteBinaryTree();
+bool BinaryTree::isBinarySearchTree(TreeNode* root) {
+    return get<0>(isBinarySearchTreeRecur(root));
 }
 
-bool BinaryTree::isFullBinaryTree() {
-    if (!isCompleteBinaryTree()) return false;
-    int depth = _root->getCBTDepth();
-    int nodeNum = _root->getCBTNodeNum();
-    return 1 << (depth - 1) == nodeNum;
+bool BinaryTree::isCompleteBinaryTree(TreeNode* root) {
+    bool leaf = false;
+    queue<TreeNode*> que;
+    que.push(root);
+    while (!que.empty()) {
+        TreeNode* cur = que.front(); que.pop();
+        if (!cur->_left && cur->_right) return false;
+        if (leaf && (cur->_left || cur->_right)) return false;
+        if (!cur->_left || !cur->_right) leaf = true;
+        if (cur->_left) que.push(cur->_left);
+        if (cur->_right) que.push(cur->_right);
+    }
+    return true;
 }
 
-string BinaryTree::serialByPreOrder() {
-    return _root ? _root->serialByPreOrder() : "#_";
+bool BinaryTree::isFullBinaryTree(TreeNode* root) {
+    if (!isCompleteBinaryTree(root)) return false;
+    int depth = getCBTDepth(root);
+    int nodeNum = getCBTNodeNum(root);
+    return (1 << depth) - 1 == nodeNum;
 }
 
-string BinaryTree::serialByInOrder() {
-    return _root ? _root->serialByInOrder() : "#_";
+int BinaryTree::getCBTNodeNum(TreeNode* root) {
+    if (!isCompleteBinaryTree(root)) return -1;
+    int depth = getCBTDepth(root);
+    if (root->_right && getCBTDepth(root->_right) + 1 == depth) {
+        return (1 << (depth - 1)) + getCBTNodeNum(root->_right);
+    } else if (root->_left){
+        return (1 << (depth - 2)) + getCBTNodeNum(root->_left);
+    } else {
+        return 1;
+    }
 }
 
-string BinaryTree::serialByPostOrder() {
-    return _root ? _root->serialByPostOrder() : "#_";
+int BinaryTree::getCBTDepth(TreeNode* root) {
+    int depth = 0;
+    TreeNode* cur = root;
+    while (cur) {
+        cur = cur->_left;
+        depth++;
+    }
+    return depth;
+}
+
+string BinaryTree::serialByPreOrder(TreeNode* root) {
+    return root ? root->serialByPreOrder() : "#_";
+}
+
+string BinaryTree::serialByInOrder(TreeNode* root) {
+    return root ? root->serialByInOrder() : "#_";
+}
+
+string BinaryTree::serialByPostOrder(TreeNode* root) {
+    return root ? root->serialByPostOrder() : "#_";
 }
 
 TreeNode *BinaryTree::reconByPreString(const string& str) {
@@ -306,11 +287,11 @@ TreeNode* BinaryTree::reverseEdge(TreeNode* head) {
     return pre;
 }
 
-void BinaryTree::printEdge(TreeNode* head) {
+void BinaryTree::handleEdge(TreeNode* head, vector<int>& v) {
     TreeNode* tail = reverseEdge(head);
     TreeNode* cur = tail;
     while (cur) {
-        cout << *cur;
+        v.push_back(cur->_value);
         cur = cur->_right;
     }
     reverseEdge(tail);

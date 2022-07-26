@@ -38,7 +38,7 @@ void dijkstraTest() {
     };
     Graph graph(mat);
     Node* pHead = graph.getNode(0);
-    unordered_map<Node*, double> res = dijkstra(graph, pHead);
+    unordered_map<Node*, double> res = Graph::dijkstra(graph, pHead);
     for (auto [pNode, distance] : res) {
         cout << *pNode << distance << endl;
     }
@@ -70,6 +70,5 @@ void maxXorSubArray() {
 }
 
 int main() {
-
     return 0;
 }

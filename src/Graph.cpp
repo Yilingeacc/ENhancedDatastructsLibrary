@@ -34,13 +34,14 @@ Graph::~Graph() {
     for (auto _edge : _edges) delete _edge;
 }
 
-void Graph::dfs(Node* pNode) {
-    if (!pNode) return;
+vector<int> Graph::dfs(Node* pNode) {
+    if (!pNode) return {};
     stack<Node*> path;
     unordered_set<Node*> visited;
+    vector<int> v;
     path.push(pNode);
     visited.insert(pNode);
-    cout << *pNode;
+    v.push_back(pNode->_id);
     while (!path.empty()) {
         Node* cur = path.top(); path.pop();
         for (Node* next : cur->_nexts) {
@@ -48,22 +49,24 @@ void Graph::dfs(Node* pNode) {
                 path.push(cur);
                 path.push(next);
                 visited.insert(next);
-                cout << *next;
+                v.push_back(next->_id);
                 break;
             }
         }
     }
+    return v;
 }
 
-void Graph::bfs(Node* pNode) {
-    if (!pNode) return;
+vector<int> Graph::bfs(Node* pNode) {
+    if (!pNode) return {};
     queue<Node*> queue;
     unordered_set<Node*> visited;
+    vector<int> v;
     queue.push(pNode);
     visited.insert(pNode);
     while (!queue.empty()) {
         Node* cur = queue.front(); queue.pop();
-        cout << *cur;
+        v.push_back(cur->_id);
         for (Node* next : cur->_nexts) {
             if (visited.find(next) == visited.end()) {
                 queue.push(next);
@@ -71,9 +74,10 @@ void Graph::bfs(Node* pNode) {
             }
         }
     }
+    return v;
 }
 
-vector<Node*> sortedTopology(Graph& graph) {
+vector<Node*> Graph::sortedTopology(Graph& graph) {
     unordered_map<Node*, int> inMap;
     queue<Node*> zeroInQueue;
     for (auto& _node : graph._nodes) {
@@ -93,7 +97,7 @@ vector<Node*> sortedTopology(Graph& graph) {
     return res;
 }
 
-unordered_set<Edge*> kruskalMST(Graph& graph) {
+unordered_set<Edge*> Graph::kruskalMST(Graph& graph) {
     UnionFindSet<Node> unionFindSet;
     unionFindSet.makeSet(graph._nodes);
     priority_queue<Edge*, vector<Edge*>, CmpEdgePtrs> priorityQueue;
@@ -111,7 +115,7 @@ unordered_set<Edge*> kruskalMST(Graph& graph) {
     return res;
 }
 
-unordered_set<Edge*> primMST(Graph& graph) {
+unordered_set<Edge*> Graph::primMST(Graph& graph) {
     priority_queue<Edge*, vector<Edge*>, CmpEdgePtrs> priorityQueue;
     unordered_set<Node*> visited;
     unordered_set<Edge*> res;
@@ -135,7 +139,7 @@ unordered_set<Edge*> primMST(Graph& graph) {
     return res;
 }
 
-unordered_map<Node*, double> dijkstra(Graph& graph, Node* pHead) {
+unordered_map<Node*, double> Graph::dijkstra(Graph& graph, Node* pHead) {
     NodeHeap nodeHeap(graph._nodes.size());
     nodeHeap.updateIfCloser(pHead, 0);
     unordered_map<Node*, double> res;

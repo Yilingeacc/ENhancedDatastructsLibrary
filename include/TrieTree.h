@@ -172,8 +172,6 @@ void TrieTree<int>::insert(int value) {
     }
 }
 
-#include<bitset>
-
 int TrieTree<int>::getMaxXorResult(int value) {
     TrieNode<int>* cur = _root;
     int res = 0;

@@ -1,4 +1,4 @@
-"C:\Program Files\JetBrains\CLion 2021.2.2\bin\cmake\win\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug -DCMAKE_DEPENDS_USE_COMPILER=FALSE -G "CodeBlocks - MinGW Makefiles" D:\codes\Cpp\ClionProject
+"D:\Program Files\JetBrains\CLion 2021.2.2\bin\cmake\win\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug -DCMAKE_DEPENDS_USE_COMPILER=FALSE -G "CodeBlocks - NMake Makefiles" D:\Cpp\ClionProject
 -- Configuring done
 -- Generating done
--- Build files have been written to: D:/codes/Cpp/ClionProject/cmake-build-debug
+-- Build files have been written to: D:/Cpp/ClionProject/cmake-build-debug
